@@ -3,6 +3,8 @@ import {ControlLabel, DropdownButton, MenuItem} from "react-bootstrap";
 import FormControl from "react-bootstrap/es/FormControl";
 import HelpBlock from "react-bootstrap/es/HelpBlock";
 import FormGroup from "react-bootstrap/es/FormGroup";
+import './App.css';
+
 var STATES = [
   'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI',
   'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS',
@@ -18,7 +20,8 @@ export class FormComponent extends React.Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-      value: ''
+      value: '',
+      state: ''
     };
   }
 
@@ -60,10 +63,8 @@ export class FormComponent extends React.Component {
           id={`dropdown-basic-${this.i}`}
         >
           {STATES.map(function(name, index){
-            return <MenuItem key={ index }>{name}</MenuItem>;
+            return <MenuItem key={ index } >{name}</MenuItem>;
           })}
-          <MenuItem eventKey="1">Action</MenuItem>
-
         </DropdownButton>
       </form>
     );
