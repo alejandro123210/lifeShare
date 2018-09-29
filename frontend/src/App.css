@@ -42,6 +42,7 @@ FormComponent {
 [data-reactroot]
 {height: 100% !important; }
 
-MenuItem {
-
+#theform {
+    width:30%;
+    margin: 5% auto auto auto;
 }

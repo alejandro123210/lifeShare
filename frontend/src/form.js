@@ -21,7 +21,7 @@ export class FormComponent extends React.Component {
 
     this.state = {
       value: '',
-      state: ''
+      usstate: ''
     };
   }
 
@@ -34,12 +34,13 @@ export class FormComponent extends React.Component {
   }
 
   handleChange(e) {
-    this.setState({ value: e.target.value });
+    this.setState({ [e.target.name] : e.target.value });
   }
+
 
   render() {
     return (
-      <form>
+      <form id="theform">
         <FormGroup
           controlId="formBasicText"
           validationState={this.getValidationState()}
@@ -48,24 +49,29 @@ export class FormComponent extends React.Component {
           <ControlLabel>Working example with validation</ControlLabel>
           <FormControl
             type="text"
-            value={this.state.value}
+            // value={this.state.value}
             placeholder="Enter text"
-            onChange={this.handleChange}
+            name="value"
+            onChange={this.handleChange.bind(this)}
             bsSize="sm"
           />
           <FormControl.Feedback />
           <HelpBlock>Validation is based on string length.</HelpBlock>
         </FormGroup>
-        <DropdownButton
-          bsStyle={this.title.toLowerCase()}
-          title={this.title}
-          key={this.i}
-          id={`dropdown-basic-${this.i}`}
-        >
-          {STATES.map(function(name, index){
-            return <MenuItem key={ index } >{name}</MenuItem>;
-          })}
-        </DropdownButton>
+
+        <FormGroup controlId="formControlsSelect">
+          <ControlLabel>State</ControlLabel>
+          <FormControl componentClass="select" placeholder="select" value={this.state.usstate}
+                       onChange={this.handleChange.bind(this)} name="usstate">
+            {STATES.map(function(name, index){
+              return <option >{name}</option>;
+            })}
+          </FormControl>
+        </FormGroup>
+
+
+        <p value={this.state.usstate}>{ this.state.usstate }</p>
+        <p value={this.state.value}>{ this.state.value }</p>
       </form>
     );
   }
