@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import {ControlLabel} from "react-bootstrap";
 import FormControl from "react-bootstrap/es/FormControl";
 import HelpBlock from "react-bootstrap/es/HelpBlock";
+import FormGroup from "react-bootstrap/es/FormGroup";
 
-class FormComponent extends React.Component {
+export class FormComponent extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -47,5 +48,3 @@ class FormComponent extends React.Component {
     );
   }
 }
-
-render(<FormComponent />);
