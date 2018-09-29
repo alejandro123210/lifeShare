@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
-import {ControlLabel} from "react-bootstrap";
+import {ControlLabel, DropdownButton, MenuItem} from "react-bootstrap";
 import FormControl from "react-bootstrap/es/FormControl";
 import HelpBlock from "react-bootstrap/es/HelpBlock";
 import FormGroup from "react-bootstrap/es/FormGroup";
-
+var STATES = [
+  'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI',
+  'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS',
+  'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR',
+  'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
+]
 export class FormComponent extends React.Component {
+  title = "State";
+  i = 0;
   constructor(props, context) {
     super(props, context);
 
@@ -33,6 +40,7 @@ export class FormComponent extends React.Component {
         <FormGroup
           controlId="formBasicText"
           validationState={this.getValidationState()}
+          bsSize="sm"
         >
           <ControlLabel>Working example with validation</ControlLabel>
           <FormControl
@@ -40,10 +48,23 @@ export class FormComponent extends React.Component {
             value={this.state.value}
             placeholder="Enter text"
             onChange={this.handleChange}
+            bsSize="sm"
           />
           <FormControl.Feedback />
           <HelpBlock>Validation is based on string length.</HelpBlock>
         </FormGroup>
+        <DropdownButton
+          bsStyle={this.title.toLowerCase()}
+          title={this.title}
+          key={this.i}
+          id={`dropdown-basic-${this.i}`}
+        >
+          {STATES.map(function(name, index){
+            return <MenuItem key={ index }>{name}</MenuItem>;
+          })}
+          <MenuItem eventKey="1">Action</MenuItem>
+
+        </DropdownButton>
       </form>
     );
   }

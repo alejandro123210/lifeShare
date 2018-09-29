@@ -1,5 +1,12 @@
 .App {
   text-align: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+FormComponent {
+    width: 50%;
 }
 
 .App-logo {
@@ -26,3 +33,5 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+[data-reactroot]
+{height: 100% !important; }
