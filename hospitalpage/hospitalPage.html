@@ -9,7 +9,7 @@
       text-align: center;
       align-content: center;
       align-items: center;
-      padding-top: 17%
+      padding-top: 13%
     }
   
     textarea {
@@ -27,28 +27,19 @@
 
 <body>
   <div>
-    <h1 id='1'>Life Share</h1>
+    <h1 id='1'>Enter a city to notify!</h1>
     <!-- All of the Node.js APIs are available in this renderer process. -->
     <p>
-      <input 
-        type="tel" 
-        id="numberField" 
-        name="numberField"
-        placeholder="123-456-7890"
-        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-        required 
+      <input
+        type="text"
+        placeholder="City"
+        name="cityField"
+        id="cityField"
+        required
+        autofocus
       />
     </p>
     <p>
-      <input 
-        type="text" 
-        id="cityField" 
-        name="cityField" 
-        placeholder="City" 
-        required/>
-    </p>
-    <p>
-      <!-- <input type="text" id="stateField" name="stateField" placeholder="State" required/> -->
       <select id="stateField" >
           <option value="NY">New York</option>
           <option value="AL">Alabama</option>
@@ -104,29 +95,23 @@
       </select>				
     </p>
     <p>
+      <textarea 
+        type="text"
+        name="messageField"
+        id="messageField"
+        cols="50"
+        rows="10"
+        required
+      >
+      
+        
+      </textarea>
+    </p>
+    <p>
       <button onclick="onPress()" type="button" id="doneButton">Done</button>
     </p>
     <p id="done"></p>
   </div>
 </body>
-
-<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-database.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyBdGixcqWSvMHHsOfgvzZST21FlxDDMn7w",
-    authDomain: "care-7497b.firebaseapp.com",
-    databaseURL: "https://care-7497b.firebaseio.com",
-    projectId: "care-7497b",
-    storageBucket: "care-7497b.appspot.com",
-    messagingSenderId: "482442297520"
-  };
-  firebase.initializeApp(config);
-  var db = firebase.database();
-
-  function onPress() {
-  }
-</script>
 
 </html>
