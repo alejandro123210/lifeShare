@@ -4,7 +4,8 @@ import FormControl from "react-bootstrap/es/FormControl";
 import HelpBlock from "react-bootstrap/es/HelpBlock";
 import FormGroup from "react-bootstrap/es/FormGroup";
 import './App.css';
-
+import firebase from './firebase.js';
+import Button from "react-bootstrap/es/Button";
 var STATES = [
   'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI',
   'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS',
@@ -18,21 +19,47 @@ export class FormComponent extends React.Component {
     super(props, context);
 
     this.handleChange = this.handleChange.bind(this);
-
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
-      value: '',
-      usstate: ''
+      name: '',
+      city: '',
+      usstate: 'AL',
+      phone: ''
     };
   }
 
-  getValidationState() {
-    const length = this.state.value.length;
-    if (length > 10) return 'success';
-    else if (length > 5) return 'warning';
-    else if (length > 0) return 'error';
+  handleSubmit(e) {
+    e.preventDefault();
+    const itemsRef = firebase.database().ref(this.state.usstate).child(this.state.city).child(this.state.phone)
+    console.log(itemsRef);
+    const item = {
+      state: this.state.usstate,
+      name: this.state.name,
+      city: this.state.city,
+      number: this.state.phone
+    }
+    itemsRef.push(item);
+  }
+  phoneValidationState() {
+    if (this.phonenumber(this.state.phone)) {
+      return 'success';
+    }
+    else {
+      return 'error';
+    }
     return null;
   }
-
+  phonenumber(input)
+  {
+    var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    if(input.match(phoneno)) {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
   handleChange(e) {
     this.setState({ [e.target.name] : e.target.value });
   }
@@ -40,25 +67,41 @@ export class FormComponent extends React.Component {
 
   render() {
     return (
-      <form id="theform">
-        <FormGroup
+      <form id="theform" onSubmit={this.handleSubmit}>
+        <h1 id="header">LifeShare</h1>
+        <div class="formdiv">
+
+          <FormGroup
           controlId="formBasicText"
-          validationState={this.getValidationState()}
           bsSize="sm"
         >
-          <ControlLabel>Working example with validation</ControlLabel>
+          <ControlLabel>Name</ControlLabel>
+
           <FormControl
             type="text"
             // value={this.state.value}
             placeholder="Enter text"
-            name="value"
+
+            name="name"
             onChange={this.handleChange.bind(this)}
             bsSize="sm"
           />
-          <FormControl.Feedback />
-          <HelpBlock>Validation is based on string length.</HelpBlock>
         </FormGroup>
+          <FormGroup
+            controlId="formBasicText"
+            bsSize="sm"
+          >
+            <ControlLabel>City</ControlLabel>
 
+            <FormControl
+              type="text"
+              // value={this.state.value}
+              placeholder="Enter text"
+              name="city"
+              onChange={this.handleChange.bind(this)}
+              bsSize="sm"
+            />
+          </FormGroup>
         <FormGroup controlId="formControlsSelect">
           <ControlLabel>State</ControlLabel>
           <FormControl componentClass="select" placeholder="select" value={this.state.usstate}
@@ -69,9 +112,28 @@ export class FormComponent extends React.Component {
           </FormControl>
         </FormGroup>
 
+          <FormGroup
+            controlId="phoneControl"
+            validationState={this.phoneValidationState()}
+            bsSize="sm"
+          >
+            <ControlLabel>Phone</ControlLabel>
 
-        <p value={this.state.usstate}>{ this.state.usstate }</p>
-        <p value={this.state.value}>{ this.state.value }</p>
+            <FormControl
+            type="text"
+            // value={this.state.value}
+            placeholder="Phone Number"
+            name="phone"
+            onChange={this.handleChange.bind(this)}
+            bsSize="sm"
+          />
+
+          </FormGroup>
+        {/*<p value={this.state.usstate}>{ this.state.usstate }</p>*/}
+        {/*<p value={this.state.value}>{ this.state.name }</p>*/}
+          {/*<p value={this.state.phone}>{ this.state.phone }</p>*/}
+          <Button type="submit">Submit</Button>
+        </div>
       </form>
     );
   }
