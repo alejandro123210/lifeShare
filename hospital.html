@@ -158,8 +158,36 @@
       console.log(data);
       var phone = data.ref_.path.pieces_[2];
       alert(phone);
+      var form = new FormData();
+      form.append("Body", "test");
+      form.append("From", "+19738418970");
+      form.append("To", "+15165923783");
 
-    }
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://cors-anywhere.herokuapp.com/https://iceberg-dugong-1140.twil.io/x",
+        "method": "POST",
+        "headers": {
+          "access-control-allow-origin": "*",
+          "origin": "x",
+          "body": "test",
+          "from": "+19738418970",
+          "to": "+15165923783",
+          "authorization": "Basic QUM2OTI3NzFlOGRlMTAzZGUzZDI5NTVmNDU3ODBiNjJjZTo2NDIyMjE4Nzg1YjQ1NThmMDA1ODE2OWQxZTA4ZmNmYw==",
+          "cache-control": "no-cache",
+          "postman-token": "517b7a23-38c1-9ef2-3fe0-6a455b4cc849"
+        },
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": form
+      }
+
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+    });
     
     }
 
