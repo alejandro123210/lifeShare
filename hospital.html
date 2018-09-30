@@ -114,7 +114,13 @@
 </body>
 
 <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-database.js">
+  
+</script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 
 <script>
   // Initialize Firebase
@@ -130,60 +136,32 @@
   var db = firebase.database();
 
   function onPress() {
-    //saves data
-    // var city = document.getElementById('cityField').value;
-    // var state = document.getElementById('stateField').value;
-    // var message = document.getElementById('messageField').value;
-    // //deletes textfields
-    // var messageElement = document.getElementById('messageField');
-    // var cityElement = document.getElementById('cityField');
-    // var stateElement = document.getElementById('stateField');
-    // var buttonElement = document.getElementById('doneButton');
-    // messageElement.parentNode.removeChild(messageElement);
-    // cityElement.parentNode.removeChild(cityElement);
-    // stateElement.parentNode.removeChild(stateElement);
-    // buttonElement.parentNode.removeChild(buttonElement);
-    // document.getElementById('done').innerHTML = "Done!";
+    var city = document.getElementById('cityField').value;
+    var state = document.getElementById('stateField').value;
+    var message = document.getElementById('messageField').value;
+    //deletes textfields
+    var messageElement = document.getElementById('messageField');
+    var cityElement = document.getElementById('cityField');
+    var stateElement = document.getElementById('stateField');
+    var buttonElement = document.getElementById('doneButton');
+    messageElement.parentNode.removeChild(messageElement);
+    cityElement.parentNode.removeChild(cityElement);
+    stateElement.parentNode.removeChild(stateElement);
+    buttonElement.parentNode.removeChild(buttonElement);
+    document.getElementById('done').innerHTML = "Done!";
 
-    // //get existing database data
-    // var x = state + "/" + city + "/";
-    // var ref = db.ref(x);
-    // console.log(ref);
-    // ref.on('child_added', function(data) {
-    //   console.log(data);
-    //   var phone = data.ref_.path.pieces_[2];
-    //   alert(phone)
-    // })
+    //get existing database data
+    var x = state + "/" + city + "/";
+    var ref = db.ref(x);
+    console.log(ref);
+    ref.on('child_added', function(data) {
+      console.log(data);
+      var phone = data.ref_.path.pieces_[2];
+      alert(phone);
+
+    }
     
-    var data = new FormData();
-    data.append("Body", "test");
-    data.append("From", "+19738418970");
-    data.append("To", "+19739975871");
-    
-
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
-
-    xhr.addEventListener("readystatechange", function () {
-      if (this.readyState === 4) {
-        console.log(this.responseText);
-      }
-    });
-    
-
-    xhr.open("POST", "https://cors-anywhere.herokuapp.com/https://api.twilio.com/2010-04-01/Accounts/AC692771e8de103de3d2955f45780b62ce/Messages.json");
-    xhr.setRequestHeader("access-control-allow-origin", "*");
-    
-    xhr.setRequestHeader("origin", "x");
-
-
-    xhr.setRequestHeader("authorization", "Basic QUM2OTI3NzFlOGRlMTAzZGUzZDI5NTVmNDU3ODBiNjJjZTo2NDIyMjE4Nzg1YjQ1NThmMDA1ODE2OWQxZTA4ZmNmYw==");
-    xhr.setRequestHeader("cache-control", "no-cache");
-    xhr.setRequestHeader("postman-token", "2f4be8db-ae49-1c4d-a233-27f2c95a7be6");
-
-    xhr.send(data);
-    
-}
+    }
 
 </script>
 
